@@ -1,0 +1,177 @@
+:root {
+	--background-body: rgb(226, 226, 226);
+}
+
+* {
+	z-index: 0;
+	box-sizing: border-box;
+}
+
+body::after {
+	position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	z-index: -100;
+	content: url(../img/countdown.png);
+}
+
+body {
+	margin: 0;
+	overflow: hidden;
+	background-color: var(--background-body);
+}
+
+.main-game {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.genius {
+	display: grid;
+	grid-template-areas: "green-area red-area" "yellow-area blue-area";
+	grid-gap: 10px;
+	border: solid 1px white;
+	background-color: white;
+	border-radius: 100%;
+	width: 700px;
+	height: 700px;
+}
+
+.blue {
+	grid-area: blue-area;
+	background-color: blue;
+	border-bottom-right-radius: 100%;
+}
+
+.red {
+	grid-area: red-area;
+	background-color: red;
+	border-top-right-radius: 100%;
+}
+
+.green {
+	grid-area: green-area;
+	background-color: green;
+	border-top-left-radius: 100%;
+}
+
+.yellow {
+	grid-area: yellow-area;
+	background-color: yellow;
+	border-bottom-left-radius: 100%;
+}
+
+.color {
+	cursor: pointer;
+	transition: transform linear 500ms;
+	filter: brightness(0.6);
+}
+
+.color.selected {
+	transform: scale(1.2);
+	filter: brightness(300%);
+}
+
+.countdown {
+	width: 0;
+	height: 0;
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url(../img/countdown.png);
+	background-size: calc(3 * 100%) 100%;
+	z-index: 2;
+	filter: brightness(500%);
+}
+
+.countdown.counting {
+	width: 200px;
+	height: 200px;
+	background-image: url(../img/countdown.png);
+	animation: countdown steps(2) 1.3s none;
+	-webkit-animation: countdown steps(2) 1.3s none;
+}
+
+@keyframes countdown {
+	from {
+		background-position: calc(-2 * 100%);
+	}
+	to {
+		background-position: calc(0 * 100%);
+	}
+}
+
+.fade {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: -1;
+}
+
+.fade.show {
+	z-index: 1;
+}
+
+.card {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	display: grid;
+	grid-auto-rows: 1fr;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	z-index: 2;
+	border: solid 2px white;
+	color: white;
+	background-color: rgba(184, 0, 184, 0.9);
+	user-select: none;
+}
+
+.hide {
+	display: none;
+}
+
+.card .start {
+	border: none;
+	background-color: white;
+	cursor: pointer;
+	height: 50%;
+	opacity: 0.9;
+	transition: all ease-in 0.2s;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.card .start:hover {
+	opacity: 1;
+	transform: scale(1.1);
+}
+
+/* progress circle */
+.progress {
+	width: 900px;
+	height: 900px;
+	position: absolute;
+	transform: rotate(-90deg);
+	stroke-dasharray: calc(2 * 3.1416 * 370); /* (2PI * 40px) */
+	stroke-dashoffset: calc(2 * 3.1416 * 370);
+	transition: all ease 1s;
+	z-index: -1;
+}
+
+.progress circle {
+	cx: 450;
+	cy: 450;
+	r: 370;
+	stroke: rgb(31, 228, 31);
+	stroke-width: 32;
+	fill: transparent;
+}
